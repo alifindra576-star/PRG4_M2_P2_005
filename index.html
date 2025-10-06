@@ -1,35 +1,39 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelipatan 3</title>
+    <title>Menghitung Nilai</title>
 </head>
 <body>
+    <label for="inputangka">Masukkan Angka:</label>
+    <input type="text" id="inputangka" placeholder="Contoh: 10, 20, 30, 40, 50">
+    <button onclick="tampilkan()">Hitung</button>
 
+    <div id="input"></div>
 
-    <label for="kelipatan3()"></label>
     <script>
-        function kelipatan3() {
-            let i;
-            for (i = 1; i <= 100; i++) {
-                 if (i % 15 == 0) {
-                document.write("MI2B");
-            }
-             else if (i % 5 === 0) {
-                document.write("2B");
-            }
-            else if (i % 3 === 0) {
-                document.write("MI");
-            }
-            else {
-                document.write(i);
-            }
-            document.write(" , ");
-           
+        const hitungratarata = (arr) => {
+            const total = arr.reduce((acc, val) => acc + val, 0);
+            return total / arr.length;
         }
-    }
-        kelipatan3();
 
+        function tampilkan() {
+            const input = document.getElementById('inputangka').value;
+            const arr = input.split(',').map(num => parseFloat(num.trim()));
+
+            const min = Math.min(...arr);
+            const max = Math.max(...arr);
+            const ratarata = hitungratarata(arr);
+            const diAtas = arr.filter(num => num > ratarata).length;
+
+            document.getElementById('input').innerHTML = `
+                <p>Array Angka: [${arr.join(', ')}]</p>
+                <p>Nilai Minimum: ${min}</p>
+                <p>Nilai Maksimum: ${max}</p>
+                <p>Rata-rata: ${ratarata.toFixed(2)}</p>
+            `;
+        }
     </script>
 </body>
 </html>
