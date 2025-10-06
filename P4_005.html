@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+</head>
+<body>
+    <label for="Inputarray"> Masukan Angka </label>
+    <input type="text" id="Inputarray" placeholder="Contoh : 10, 20, 30, 40, 50">
+
+    <button onclick="hitungdantampilkan()"> Hitung </button>
+
+    <div id="result"></div>
+
+
+    <script>
+        const hitungratarata = (arr) => {
+            const total = arr.reduce((acc, val) => acc + val, 0);
+            return total / arr.length;
+        };
+
+        const hitunglebihbesardariratarata = (arr) => {
+            const ratarata = hitungratarata(arr);
+            const angkadiaatsratarata = arr.filter(val => val > ratarata);
+            return angkadiaatsratarata.length;
+        };
+        
+        function hitungdantampilkan() {
+            const input = document.getElementById('Inputarray').value;
+            const arr = input.split(',').map(num => parseFloat(num.trim()));
+
+            const ratarata = hitungratarata(arr);
+            const jumlahlebihbesar = hitunglebihbesardariratarata(arr);
+
+            document.getElementById('result').innerHTML = `
+                <p> Array Angka: [${arr.join(', ')}] </p>
+                <p> Rata-rata: ${ratarata.toFixed(2)} </p>
+                <p>  Jumlah angka diaats Rata-Rata: ${jumlahlebihbesar} </p>
+            `;
+        }
+    </script>
+
+</body>
+</html>

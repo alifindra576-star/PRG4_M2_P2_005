@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Tugas - P3_005</title>
+</head>
+<body>
+    <h1>Daftar Tugas - P3_005</h1>
+
+    <input type="text" id="inputtugas" placeholder="Masukkan tugas">
+    <button onclick="tambahtugas()">Tambah Tugas</button>
+    <button onclick="tampilkan()">Lihat Tugas</button>
+
+    <ul id="listtugas" style="display:none;"></ul>
+
+    <script>
+        // Variabel global
+        let daftartugas = [];
+
+        function tambahtugas() {
+            const input = document.getElementById('inputtugas');
+            const tugas = input.value.trim();
+
+            if (tugas) {
+                daftartugas.push(tugas);
+                console.log(`Tugas "${tugas}" berhasil ditambahkan.`);
+                alert(`Tugas "${tugas}" berhasil ditambahkan.`);
+                input.value = '';
+            } else {
+                alert('Masukkan tugas terlebih dahulu.');
+            }
+        }
+
+        function tampilkan() {
+            const list = document.getElementById('listtugas');
+            list.innerHTML = '';
+
+            if (daftartugas.length === 0) {
+                list.innerHTML = '<li>Tidak ada tugas.</li>';
+            } else {
+                daftartugas.forEach((tugas, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = tugas + " ";
+
+                    const btnhapus = document.createElement('button');
+                    btnhapus.textContent = 'Hapus';
+                    btnhapus.onclick = () => hapustugas(index);
+
+                    li.appendChild(btnhapus);
+                    list.appendChild(li);
+                });
+            }
+            list.style.display = 'block';
+        }
+        
+        function hapustugas(index) {
+            const hapus = confirm(`Hapus tugas "${daftartugas[index]}"?`);
+            if (hapus) {
+                daftartugas.splice(index, 1);
+                tampilkan();
+            }
+        }
+    </script>
+</body>
+</html>
